@@ -10,7 +10,7 @@ public class WebServisTest {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-          .url("http://localhost:8888/haberci/olustur?haber=TrafikKazası")
+          .url("http://localhost:7777/haberci/olustur?haber=TrafikKazası")
           .get()
           .addHeader("cache-control", "no-cache")
           .addHeader("postman-token", "cf587d5f-e520-fcc7-027c-ea6f1187d851")
