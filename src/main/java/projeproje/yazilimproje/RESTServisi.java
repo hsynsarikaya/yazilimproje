@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RESTServisi {
-
-    private static final List<Haberci> HABERCİLER = new ArrayList<Haberci>();
+ 
+    private static final List<Haberci> HABERCILER = new ArrayList<Haberci>();
     
     private Object kilit = new Object();
     
     @RequestMapping("/haberci/olustur")
-    public synchronized Haberci haberciOlustur(String haber){
+    public synchronized Haberci haberciOlustur(String haber, String tarih){
         synchronized (kilit) {
-            Haberci haberci = new Haberci(haber);
-            HABERCİLER.add(haberci);
+            Haberci haberci = new Haberci(haber, tarih);
+            HABERCILER.add(haberci);
             return haberci;
         }
     }
@@ -25,10 +25,10 @@ public class RESTServisi {
     @RequestMapping("/haberci/listele")
     public synchronized List<Haberci> haberciListele(){
         synchronized (kilit) {
-            if (HABERCİLER.size()>10) {
-                return HABERCİLER.subList(0, 10);
+            if (HABERCILER.size()>10) {
+                return HABERCILER.subList(0, 10);
             } else {
-                return HABERCİLER;
+                return HABERCILER;
             }
             
         }
@@ -37,7 +37,7 @@ public class RESTServisi {
     @RequestMapping("/haberci/temizle")
     public String haberciTemizle(){
         synchronized (kilit) {
-            HABERCİLER.clear();
+            HABERCILER.clear();
             return "OK";
         }
     }
